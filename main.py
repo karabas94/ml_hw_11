@@ -8,10 +8,12 @@ from gensim.models import KeyedVectors
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
+from nltk.stem import WordNetLemmatizer
 
 # for tokenization sentences
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('wordnet')
 
 """
 побудувати text classifier для задачі sentiment classification
@@ -58,6 +60,7 @@ funct for decoding the review text. "?" - word not fount in dictionary. "i-3" - 
 
 stop = set(stopwords.words('english'))
 stemmer = SnowballStemmer('english')
+lemmatizer = WordNetLemmatizer()
 
 
 def clean_text(text):
@@ -69,6 +72,7 @@ delete stopwords
     text = re.sub(r'[^\w\s]', '', text)
     text = text.lower()
     text = ' '.join([stemmer.stem(word) for word in text.split() if word not in stop])
+    # text = ' '.join([lemmatizer.lemmatize(word) for word in text.split() if word not in stop])
     return text
 
 
