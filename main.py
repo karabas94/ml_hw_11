@@ -112,16 +112,19 @@ measure distance between review and P,N
 
 
 results = []
-correct_count = 0
 for review, label in zip(x_train, y_train):
     decoded_review = decode_review(review)
     cleaned_review = clean_text(decoded_review)
     rev_emb = get_emb(cleaned_review)
     classification = classify_review(rev_emb, pos_emb, neg_emb)
     results.append((classification, 'positive' if label == 1 else 'negative'))
-    correct_count += (classification == ('positive' if label == 1 else 'negative'))
 
 print('first review(classified/real):', results[0])
 
-accuracy = correct_count / len(x_train)
-print(f"Accuracy: {accuracy} %")
+count = 0
+for result in results:
+    if result[0] == result[1]:
+        count += 1
+
+accuracy = count / len(results)
+print('Accuracy:', accuracy)
