@@ -32,7 +32,7 @@ nltk.download('wordnet')
 """
 
 # download imdb dataset
-(x_train, y_train), (x_test, y_test) = keras.datasets.imdb.load_data(num_words=20000)
+(x_train, y_train), _ = keras.datasets.imdb.load_data(num_words=20000)
 
 # download googleNews model
 model_path = 'GoogleNews-vectors-negative300.bin.gz'
